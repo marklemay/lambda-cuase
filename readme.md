@@ -11,6 +11,9 @@ possibly relevant prior work
    * https://dl.acm.org/citation.cfm?doid=1050849.1050865
    * http://ieeexplore.ieee.org.ezproxy.bu.edu/document/5010248/?reload=true
 
+ * Resugaring: lifting evaluation sequences through syntactic sugar
+   * https://dl.acm.org/citation.cfm?id=2594319
+
  * Functional programs that explain their work
    * https://www.cs.bham.ac.uk/~pbl/papers/functionalexplain.pdf
    * https://dl.acm.org/citation.cfm?id=2364579
