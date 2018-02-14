@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>lambda-cuase</groupId>
+	<artifactId>lambda-cuase</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<properties>
+		<projectScalaLibrary>2.12.0</projectScalaLibrary>
+		<!-- move upl -->
+		<projectScalajsVersion>0.6.20</projectScalajsVersion>
+		<!-- 1.0 when it;s offical -->
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<!-- magic? -->
+		<!-- Scala/JS compiler plugin identification. -->
+		<sjs.plugin.groupId>org.scala-js</sjs.plugin.groupId>
+		<sjs.plugin.artifactId>scalajs-compiler_${projectScalaLibrary}</sjs.plugin.artifactId>
+		<sjs.plugin.version>${projectScalajsVersion}</sjs.plugin.version>
+		<!-- Scala/JS compiler plugin IDE integration. -->
+		<sjs.plugin.name>scalajs</sjs.plugin.name>
+		<sjs.plugin.directory>${project.build.directory}/scala-plugin</sjs.plugin.directory>
+		<sjs.eclipse.project>${basedir}/.project</sjs.eclipse.project>
+		<sjs.eclipse.settings>${basedir}/.settings</sjs.eclipse.settings>
+		<sjs.eclipse.properties>${sjs.eclipse.settings}/org.scala-ide.sdt.core.prefs</sjs.eclipse.properties>
+	</properties>
+	<dependencies>
+
+
+		<dependency>
+			<groupId>org.scala-js</groupId>
+			<artifactId>scalajs-dom_sjs0.6_2.12</artifactId>
+			<version>0.9.1</version>
+			<!-- update -->
+		</dependency>
+
+		<!-- "com.lihaoyi" %%% "scalatags" % "0.6.7 -->
+		<dependency>
+			<groupId>com.lihaoyi</groupId>
+			<artifactId>scalatags_sjs0.6_2.12</artifactId>
+			<version>0.6.7</version>
+			<!-- update -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.scala-js</groupId>
+			<artifactId>scalajs-library_2.12</artifactId>
+			<version>${projectScalajsVersion}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.scalacheck</groupId>
+			<artifactId>scalacheck_2.12</artifactId>
+			<version>1.13.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.scala-lang.modules</groupId>
+			<artifactId>scala-parser-combinators_2.12</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+			<!-- update -->
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<!-- <sourceDirectory>src/main/scala</sourceDirectory> -->
+		<plugins>
+
+
+
+
+			<!-- Provision Scala/JS compiler plugin for IDE. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>plugin-copy</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${sjs.plugin.groupId}</groupId>
+									<artifactId>${sjs.plugin.artifactId}</artifactId>
+									<version>${sjs.plugin.version}</version>
+									<outputDirectory>${sjs.plugin.directory}</outputDirectory>
+									<overWrite>false</overWrite>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Configure Scala/JS compiler plugin in IDE. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>configure-ide</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<propertyfile file="${sjs.eclipse.properties}"
+									comment="Maven Config: scala-js-lib">
+									<entry key="eclipse.preferences.version" value="1" />
+									<entry key="scala.compiler.useProjectSettings" value="true" />
+									<entry key="Xpluginsdir" value="${sjs.plugin.directory}" />
+									<entry key="Xplugin" value="" />
+									<entry key="Xplugin-disable" value="" />
+									<entry key="Xplugin-require" value="${sjs.plugin.name}" />
+								</propertyfile>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Compile none of Java. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<skipMain>true</skipMain>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- Compile Scala into JS. -->
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<configuration>
+					<compileOrder>JavaThenScala</compileOrder>
+					<scalaVersion>${projectScalaLibrary}</scalaVersion>
+					<scalaCompatVersion>${projectScalaVersion}</scalaCompatVersion>
+					<useZincServer>true</useZincServer>
+					<recompileMode>incremental</recompileMode>
+					<addZincArgs>-no-color|-fork-java</addZincArgs>
+					<addScalacArgs>-deprecation|-feature|</addScalacArgs>
+					<jvmArgs>
+						<jvmArg>-client</jvmArg>
+						<jvmArg>-Xms500m</jvmArg>
+						<jvmArg>-Xmx500m</jvmArg>
+						<jvmArg>-Xss1m</jvmArg>
+					</jvmArgs>
+					<compilerPlugins>
+						<compilerPlugin>
+							<groupId>${sjs.plugin.groupId}</groupId>
+							<artifactId>${sjs.plugin.artifactId}</artifactId>
+							<version>${sjs.plugin.version}</version>
+						</compilerPlugin>
+					</compilerPlugins>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- <groupId>org.scala-tools</groupId> <artifactId>maven-scala-plugin</artifactId> 
+				<executions> <execution> <goals> <goal>compile</goal> <goal>testCompile</goal> 
+				</goals> </execution> </executions> <configuration> <scalaVersion>${scala.version}</scalaVersion> 
+				<jvmArgs> <jvmArg>-Xms64m</jvmArg> <jvmArg>-Xmx1024m</jvmArg> </jvmArgs> 
+				<recompileMode>incremental</recompileMode> <compilerPlugins> <compilerPlugin> 
+				<groupId>org.scala-js</groupId> <artifactId>scalajs-compiler_2.12.0</artifactId> 
+				<version>${scalajs.version}</version> </compilerPlugin> </compilerPlugins> 
+				</configuration> -->
+
+		</plugins>
+	</build>
+</project>
