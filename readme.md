@@ -22,5 +22,7 @@ possibly relevant prior work
    * https://www.youtube.com/watch?v=pqtqaL_ojpk
  * galois connection
    * ...
+ * Bidirectional transformations, lenses
+   * ...
    
  * Ochoa et al. 2008; Rodrigues and Barbosa 2007;Silva and Chitil 2006
