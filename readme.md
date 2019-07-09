@@ -6,6 +6,7 @@ possibly relevant prior work
    * https://dl.acm.org/citation.cfm?id=3110258
    * https://www.youtube.com/watch?v=6_ISyRsAhEY
    * https://arxiv.org/pdf/1705.07678.pdf
+   * https://etheses.bham.ac.uk/id/eprint/4209/
  * surveys
    * "A Brief Survey Of Program Slicing"
      * https://dl.acm.org/citation.cfm?doid=1050849.1050865
@@ -20,6 +21,7 @@ possibly relevant prior work
    * https://www.cs.bham.ac.uk/~pbl/papers/functionalexplain.pdf
    * https://dl.acm.org/citation.cfm?id=2364579
    * https://www.youtube.com/watch?v=pqtqaL_ojpk
+   * and thesis https://etheses.bham.ac.uk/id/eprint/4209/
  * galois connection
    * ...
  * Bidirectional transformations, lenses
