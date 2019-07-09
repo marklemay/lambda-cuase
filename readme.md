@@ -13,6 +13,7 @@ possibly relevant prior work
      * https://dl.acm.org/citation.cfm?id=3009900
    * Live functional programming with typed holes (2019)
      * https://dl.acm.org/citation.cfm?id=3290327
+ * https://www.lamdu.org/
  * surveys
    * "A Brief Survey Of Program Slicing"
      * https://dl.acm.org/citation.cfm?doid=1050849.1050865
