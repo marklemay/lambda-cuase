@@ -7,6 +7,8 @@ possibly relevant prior work
    * https://www.youtube.com/watch?v=6_ISyRsAhEY
    * https://arxiv.org/pdf/1705.07678.pdf
    * https://etheses.bham.ac.uk/id/eprint/4209/
+ * Live functional programming with typed holes
+   * https://dl.acm.org/citation.cfm?id=3290327
  * surveys
    * "A Brief Survey Of Program Slicing"
      * https://dl.acm.org/citation.cfm?doid=1050849.1050865
