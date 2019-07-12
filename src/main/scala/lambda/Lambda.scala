@@ -64,7 +64,7 @@ sealed trait LambdaExp {
   def eval: LambdaExp =
     this match {
       case Var(i)            => Var(i)
-      case App(Lam(fbod), a) => fbod.fill(a.eval)
+      case App(Lam(fbod), a) => fbod.fill(a.eval).eval
       case App(Hole(i), a)   => Hole(i) // need this to conform to the requirement that everything matches up to holes
       case App(f, a)         => App(f.eval, a.eval)
       case Lam(bod)          => Lam(bod.eval)
