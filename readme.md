@@ -37,3 +37,4 @@ possibly relevant prior work
  * Ochoa et al. 2008; Rodrigues and Barbosa 2007;Silva and Chitil 2006
  
  * in practice https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/onward011-mcdirmid.pdf
+ * may be related to the computable topology http://www.cs.bham.ac.uk/~mhe/papers/barbados.pdf
